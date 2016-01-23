@@ -15,14 +15,21 @@
 		</div>
 		<h:form>
 			<p:messages id="messages" />
-			<p:graphicImage id="animalImage" />
+			
+			<p:graphicImage id="animalImage" 
+				value="#{chineseZodiacController.animalImageUrl}" />
+			
+			<p:focus />
+			
 			<div class="form-group">
 				<p:outputLabel for="birthYear">Birth Year:</p:outputLabel>
-				<p:inputText id="birthYear"></p:inputText>
+				<p:inputText id="birthYear"
+					value="#{chineseZodiacController.birthYear}"></p:inputText>
+				<p:commandButton value="Go!" 
+					actionListener="#{chineseZodiacController.findAnimal()}"
+					ajax="true" 
+					update="messages, animalImage"></p:commandButton>
 			</div>
-			<p:commandButton value="Go!" 
-				ajax="true" 
-				update="messages, animalImage"></p:commandButton>
 		</h:form>				
 	</ui:define>
 
