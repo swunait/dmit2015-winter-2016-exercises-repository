@@ -17,29 +17,39 @@
 			for a fully amortized loan.
 		</p>
 		<h:form>
+			<p:messages id="messages" />
+		
 			<div class="form-group">
 				<p:outputLabel for="amount">Mortgage Amount</p:outputLabel>
 				<p:inputText id="amount"
+					value="#{cheeseBurger.currentLoan.mortgageAmount}"
 					styleClass="form-control"></p:inputText>
 			</div>
 					
 			<div class="form-group">
 				<p:outputLabel for="interestRate">Interest Rate</p:outputLabel>
 				<p:inputText id="interestRate" 
+					value="#{cheeseBurger.currentLoan.annualInterestRate}"
 					styleClass="form-control"></p:inputText>
 			</div>				
 			
 			<div class="form-group">
 				<p:outputLabel for="period">Amortization Period</p:outputLabel>
-				<p:spinner id="period" min="1" max="25" styleClass="form-control"/>
+				<p:spinner id="period" min="1" max="25" 
+					value="#{cheeseBurger.currentLoan.amortizationPeriod}"
+					styleClass="form-control"/>
 			</div>
 			
 			<p:commandButton value="Calculate"
+				actionListener="#{cheeseBurger.buttonPressed()}"
 				ajax="false"
 				styleClass="btn btn-info"></p:commandButton>
 				
 			<p:dataTable id="datatable"
-						 var="loanSchedule">
+						 var="loanSchedule"
+						 value="#{cheeseBurger.loanScheduleTable}"
+						 paginator="true"
+						 rows="12">
 				<p:column headerText="Payment Number" styleClass="alignCenter">
 					<h:outputText value="#{loanSchedule.paymentNumber}" />
 				</p:column>	
@@ -59,6 +69,11 @@
 					</h:outputText>
 				</p:column>		 			
 			</p:dataTable>	
+			
+			<p:chart type="bar" model="#{cheeseBurger.loanChart}"></p:chart>
+			
+			
+			
 			
 		</h:form>
 	</ui:define>
