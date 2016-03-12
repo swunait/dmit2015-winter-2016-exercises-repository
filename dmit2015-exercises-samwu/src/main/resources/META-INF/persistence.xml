@@ -25,7 +25,7 @@
          data source, this example data source is just for development and testing! -->
       <!-- The datasource is deployed as WEB-INF/dmit2015-exercises-samwu-ds.xml, you
          can find it in the source at src/main/webapp/WEB-INF/dmit2015-exercises-samwu-ds.xml -->
-      <jta-data-source>java:jboss/datasources/dmit2015-exercises-samwuDS</jta-data-source>
+      <jta-data-source>java:jboss/datasources/chinookDS</jta-data-source>
       <class>chinook.entity.Album</class>
       <class>chinook.entity.Artist</class>
       <class>chinook.entity.Customer</class>
@@ -38,8 +38,7 @@
       <class>chinook.entity.Track</class>
       <properties>
          <!-- Properties for Hibernate -->
-         <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-         <property name="hibernate.show_sql" value="false" />
+         <property name="hibernate.show_sql" value="true" />
       </properties>
    </persistence-unit>
 </persistence>

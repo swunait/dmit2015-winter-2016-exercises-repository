@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/template-dashboard.xhtml">
+	
+	<ui:param name="title" value="Top 10 Customers" />
+
+	<ui:define name="maincontent">
+		<h1>Top 10 Customers By Invoice Total</h1>
+		<p:dataTable id="customers"
+			value="#{top10CustomersByInvoiceTotalController.top10Customers()}"
+			var="customer">
+			<p:column headerText="CustomerID">
+				<h:outputText value="#{customer.customerId}">
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Customer Name">
+				<h:outputText value="#{customer.firstName} #{customer.lastName}">
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Invoice Total">
+				<h:outputText value="#{customer.invoiceTotal}">
+					<f:convertNumber type="currency" />
+				</h:outputText>
+			</p:column>
+		</p:dataTable>
+		<p:dataTable id="customers2"
+			value="#{top10CustomersByInvoiceTotalController.top10CustomersByInvoiceTotal()}"
+			var="customer">
+			<p:column headerText="CustomerID">
+				<h:outputText value="#{customer.customerId}">
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Customer Name">
+				<h:outputText value="#{customer.customerName}">
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Invoice Total">
+				<h:outputText value="#{customer.invoiceTotal}">
+					<f:convertNumber type="currency" />
+				</h:outputText>
+			</p:column>
+		</p:dataTable>
+	</ui:define>
+
+</ui:composition>

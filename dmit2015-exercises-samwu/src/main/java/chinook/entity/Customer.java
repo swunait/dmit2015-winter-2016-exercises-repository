@@ -1,7 +1,12 @@
 package chinook.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import javax.persistence.*;
+
+import chinook.domain.Top10CustomerByInvoiceTotal;
+
 import java.util.List;
 
 
@@ -11,8 +16,29 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Customer.findAll", query="SELECT c FROM Customer c")
+@SqlResultSetMapping(
+		name="Top25PercentCustomerResult",
+		classes = {
+				@ConstructorResult(targetClass = Top10CustomerByInvoiceTotal.class,
+					columns = {
+							@ColumnResult(name="CustomerId"),
+							@ColumnResult(name="CustomerName"),
+							@ColumnResult(name="InvoiceTotal")
+					})
+		}
+)
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Transient
+	private BigDecimal invoiceTotal;
+	
+	public BigDecimal getInvoiceTotal() {
+		return invoiceTotal;
+	}
+	public void setInvoiceTotal(BigDecimal invoiceTotal) {
+		this.invoiceTotal = invoiceTotal;
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

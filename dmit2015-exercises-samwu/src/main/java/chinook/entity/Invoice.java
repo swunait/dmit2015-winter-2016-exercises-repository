@@ -44,12 +44,12 @@ public class Invoice implements Serializable {
 	private BigDecimal total;
 
 	//bi-directional many-to-one association to Customer
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="CustomerId")
 	private Customer customer;
 
 	//bi-directional many-to-one association to InvoiceLine
-	@OneToMany(mappedBy="invoice")
+	@OneToMany(mappedBy="invoice",fetch=FetchType.EAGER)
 	private List<InvoiceLine> invoiceLines;
 
 	public Invoice() {
