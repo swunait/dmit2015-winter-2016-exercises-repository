@@ -1,8 +1,12 @@
 package chinook.webtier;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,8 +19,14 @@ import chinook.entity.Track;
 import helper.JSFHelper;
 
 @Named
-@RequestScoped
-public class QueryTrackByTrackIdController {
+@ViewScoped
+public class QueryTrackByTrackIdController implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private Logger logger;
+	
+	private List<Track> searchResults;	// getter
 
 	@Inject
 	private TrackService trackService;
@@ -70,6 +80,10 @@ public class QueryTrackByTrackIdController {
 		return searchResult;
 	}
 	
+	public List<Track> getSearchResults() {
+		return searchResults;
+	}
+
 	public void doSearch() {
 		searchResult = trackService.findOneByTrackId(searchValue);			
 		if( searchResult == null ) {
@@ -82,5 +96,63 @@ public class QueryTrackByTrackIdController {
 			JSFHelper.addInfoMessage("One result returned");
 		}
 	}
+	
+	public void doSearchByMediaType() {
+		searchResults = null;
+		searchResult = null;
+		try {
+			MediaType mediaTypeSeachValue = mediaTypeService.findOne(selectedMediaTypeId);
+			searchResults = trackService.findAllByMediaType(mediaTypeSeachValue);
+			JSFHelper.addInfoMessage(searchResults.size() + " record(s) found.");
+		} catch( Exception e ) {
+			JSFHelper.addInfoMessage("An error has occurred.");
+			logger.log(Level.WARNING, e.getMessage());
+		}
+	}
+	
+	public void doSearchByGenre() {
+		searchResults = null;
+		searchResult = null;
+		try {
+			Genre genreSearchValue = genreService.findOne(selectedGenreId);
+			searchResults = trackService.findAllByGenre(genreSearchValue);
+			JSFHelper.addInfoMessage(searchResults.size() + " record(s) found.");
+		} catch( Exception e ) {
+			JSFHelper.addInfoMessage("An error has occurred.");
+			logger.log(Level.WARNING, e.getMessage());
+		}
+	}
+	
+	public void doSelectTrack(Track selectedTrack) {
+		searchResult = selectedTrack;
+		searchResults = null;
+	}
+	
+	public void doCancelSearch() {
+		searchResult = null;
+		searchResults = null;
+		selectedMediaTypeId = 0;
+		selectedGenreId = 0;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

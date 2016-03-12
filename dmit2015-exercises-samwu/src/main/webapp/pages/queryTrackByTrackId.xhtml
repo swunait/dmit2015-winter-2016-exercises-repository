@@ -24,13 +24,82 @@
 			</p:inputText>
 			<p:commandButton value="Search"
 				actionListener="#{queryTrackByTrackIdController.doSearch()}"
-				ajax="false">
-			</p:commandButton>							
+				ajax="false">				
+			</p:commandButton>
+		
+<div class="form-inline">			
+			<div class="form-group">
+<p:outputLabel for="mediatypeSearch">Media Type:</p:outputLabel>
+<p:selectOneMenu id="mediatypeSearch" 
+	value="#{queryTrackByTrackIdController.selectedMediaTypeId}"
+	styleClass="form-control">
+	<f:selectItem itemLabel="Select a MediaType" itemValue="0" />
+	<f:selectItems value="#{queryTrackByTrackIdController.allMediaType}" 
+		var="mediaType" 
+		itemLabel="#{mediaType.name}"
+		itemValue="#{mediaType.mediaTypeId}" />
+</p:selectOneMenu>
+</div>
+<p:commandButton value="Search"
+	ajax="false"
+	actionListener="#{queryTrackByTrackIdController.doSearchByMediaType()}">
+</p:commandButton>
+</div>
+
+<div class="form-inline">
+					<div class="form-group">
+<p:outputLabel for="genreSearch">Genre:</p:outputLabel>
+<p:selectOneMenu id="genreSearch" 
+	value="#{queryTrackByTrackIdController.selectedGenreId}"
+	styleClass="form-control">
+	<f:selectItem itemLabel="Select a Genre" itemValue="0" />
+	<f:selectItems value="#{queryTrackByTrackIdController.allGenre}" 
+		var="genre" 
+		itemLabel="#{genre.name}"
+		itemValue="#{genre.genreId}" />
+</p:selectOneMenu>					
+					</div>
+<p:commandButton value="Search"
+	ajax="false"
+	actionListener="#{queryTrackByTrackIdController.doSearchByGenre()}">
+</p:commandButton>
+</div>
+								
 		</h:form>
+		
+<h:panelGroup id="searchResultsPanel">
+	<h:form id="resultsForm">
+		<p:dataTable id="resultsTable"
+			rendered="#{queryTrackByTrackIdController.searchResults != null}"
+			value="#{queryTrackByTrackIdController.searchResults}"
+			var="track">
+			<p:column headerText="TrackID">
+				<h:outputText value="#{track.trackId}">
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Name">
+				<h:outputText value="#{track.name}">
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Composer">
+				<h:outputText value="#{track.composer}">
+				</h:outputText>
+			</p:column>
+			<p:column >
+				<p:commandLink value="select"
+					ajax="false"
+actionListener="#{queryTrackByTrackIdController.doSelectTrack(track)}">
+				</p:commandLink>
+			</p:column>		
+		</p:dataTable>
+	</h:form>
+</h:panelGroup>
+		
 		
 		<h:panelGroup id="searchResultPanel"
 			>
-			<p:panel id="searchResultDetail" header="Track Detail">
+			<p:panel id="searchResultDetail" header="Track Detail"
+				rendered="#{queryTrackByTrackIdController.searchResult != null}">
 				<h:form id="detailForm">
 					<div class="form-group">
 						<p:outputLabel for="trackId">Track Id:</p:outputLabel>
@@ -105,7 +174,15 @@ value="#{queryTrackByTrackIdController.searchResult.bytes}"
 value="#{queryTrackByTrackIdController.searchResult.unitPrice}"						
 							styleClass="form-control">
 						</p:inputText>
-					</div>								
+					</div>			
+					<p:commandButton value="Update"></p:commandButton>
+					<p:commandButton value="Delete"></p:commandButton>
+					<p:commandButton value="cancel"
+						ajax="false"
+actionListener="#{queryTrackByTrackIdController.doCancelSearch()}">
+					</p:commandButton>
+					
+										
 				</h:form>			
 			</p:panel>
 		</h:panelGroup>
