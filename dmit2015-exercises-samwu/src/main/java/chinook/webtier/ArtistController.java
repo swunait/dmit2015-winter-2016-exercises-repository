@@ -1,0 +1,128 @@
+package chinook.webtier;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import chinook.businesstier.ArtistService;
+import chinook.entity.Artist;
+import helper.JSFHelper;
+
+@Named
+@ViewScoped
+public class ArtistController implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private Logger logger;
+	
+	@Inject
+	private ArtistService artistService;
+	
+	// Fields for querying
+	private String queryValue;
+	private Artist querySingleResult;
+	private List<Artist> queryResultList;		
+	private int queryResultCount;
+
+	// Properties for querying
+	public String getQueryValue() {
+		return queryValue;
+	}
+	public void setQueryValue(String queryValue) {
+		this.queryValue = queryValue;
+	}
+	public Artist getQuerySingleResult() {
+		return querySingleResult;
+	}
+	public void setQuerySingleResult(Artist querySingleResult) {
+		this.querySingleResult = querySingleResult;
+	}
+	public List<Artist> getQueryResultList() {
+		return queryResultList;
+	}
+	public void setQueryResultList(List<Artist> queryResultList) {
+		this.queryResultList = queryResultList;
+	}
+	public int getQueryResultCount() {
+		return queryResultCount;
+	}
+	public void setQueryResultCount(int queryResultCount) {
+		this.queryResultCount = queryResultCount;
+	}
+
+	@PostConstruct
+	public void init() {
+
+	}
+	
+	public List<Artist> retreiveAllArtist() {
+		return artistService.findAllOrderByName();
+	}
+	
+	public void doSearchForSingleResult() {
+		try {
+			int artistId = Integer.parseInt( queryValue );
+			querySingleResult = artistService.findOneByArtistId(artistId);
+			if( querySingleResult != null ) {
+				queryResultCount = 1;
+				String message = String.format("Result Results \"%s\".", queryValue);
+				JSFHelper.addInfoMessage(message);
+			} else {
+				queryResultCount = 0;
+				String message = String.format("We have found %d items that match \"%s\".", queryResultCount, queryValue);
+				JSFHelper.addWarningMessage(message);
+			}
+		} catch( NumberFormatException nfe ) {
+			JSFHelper.addErrorMessage("Search value must be a number");
+			logger.log(Level.INFO, nfe.getMessage());
+		} catch( Exception e) {
+			JSFHelper.addErrorMessage("An application exception has occurred.");
+			logger.log(Level.INFO, e.getMessage());
+		}
+	}
+	
+	public void doSearchForResultList() {
+		try {
+			queryResultList = artistService.findAllByName(queryValue);
+			if( queryResultList != null && queryResultList.size() > 0 ) {
+				queryResultCount = queryResultList.size();
+				if( queryResultCount == 1 ) {
+					querySingleResult = queryResultList.get(0);
+					queryResultList= null;
+				} else {
+					querySingleResult = null;
+				}
+				String message = String.format("Result Results \"%s\".", queryValue);
+				JSFHelper.addInfoMessage(message);
+			} else {
+				queryResultCount = 0;
+				querySingleResult = null;
+				queryResultList = null;
+				String message = String.format("We have found %d items that match \"%s\".", queryResultCount, queryValue);
+				JSFHelper.addWarningMessage(message);
+			}
+		} catch( Exception e) {
+			JSFHelper.addErrorMessage("An application exception has occurred.");
+			logger.log(Level.INFO, e.getMessage());
+		}
+	}
+	
+	public void doCancel() {
+		queryValue = "";
+		querySingleResult = null;
+		queryResultList = null;
+		queryResultCount = 0;
+	}
+	
+	public void doSelectArtist(Artist selectedArtist) {
+		querySingleResult = selectedArtist;
+		queryResultList = null;
+	}
+	
+}
