@@ -26,4 +26,15 @@ public class ArtistService {
 		return artistDao.findAllByName(name);
 	}
 
+	public void create(Artist artist) {
+		artistDao.persist(artist);
+	}
+	
+	public void update(Artist artist) {
+		artistDao.edit(artist);
+	}
+	
+	public void delete(Artist artist) {
+		artistDao.remove(artist);
+	}
 }

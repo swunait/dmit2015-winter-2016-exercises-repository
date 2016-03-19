@@ -70,6 +70,9 @@
 <h:panelGroup id="searchResultsPanel">
 	<h:form id="resultsForm">
 		<p:dataTable id="resultsTable"
+			selectionMode="single" 
+			selection="#{queryTrackByTrackIdController.searchResult}"
+			rowKey="#{track.trackId}"
 			rendered="#{queryTrackByTrackIdController.searchResults != null}"
 			value="#{queryTrackByTrackIdController.searchResults}"
 			var="track">
@@ -91,7 +94,38 @@
 actionListener="#{queryTrackByTrackIdController.doSelectTrack(track)}">
 				</p:commandLink>
 			</p:column>		
+			<p:column style="width:32px;text-align: center">
+	             <p:commandButton update=":resultsForm:carDetail" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+	                <f:setPropertyActionListener value="#{track}" target="#{queryTrackByTrackIdController.searchResult}" />
+	            </p:commandButton>
+	        </p:column>
+	        
+	         <f:facet name="footer">
+            	<p:commandButton process="resultsTable" 
+            	update=":resultsForm:carDetail" 
+            	icon="ui-icon-search" 
+            	value="View" oncomplete="PF('carDialog').show()" />
+        	</f:facet>
+			
 		</p:dataTable>
+		
+		<p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="carDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" 
+            rendered="#{not empty queryTrackByTrackIdController.searchResult}" >
+ 
+                <h:outputText value="Track Id:" />
+                <h:outputText value="#{queryTrackByTrackIdController.searchResult.trackId}" />
+ 
+                <h:outputText value="Name:" />
+                <h:outputText value="#{queryTrackByTrackIdController.searchResult.name}" />
+ 
+                <h:outputText value="Composer: " />
+                <h:outputText value="#{queryTrackByTrackIdController.searchResult.composer}" />
+ 
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
 	</h:form>
 </h:panelGroup>
 		

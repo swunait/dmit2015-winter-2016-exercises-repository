@@ -67,7 +67,7 @@
 						update="singleResultPanel"
 						actionListener="#{artistController.doSelectArtist(artist)}">
 					</p:commandLink>
-				</p:column>
+				</p:column>				
 				
 			</p:dataTable>
 			
@@ -97,7 +97,19 @@
 						>
 						</p:inputText>
 					</div>
-					
+										
+					<p:commandButton value="Update Artist" icon="ui-icon-disk" styleClass="btn btn-success"
+						ajax="true" update="messages, :queryForm:queryValue, singleResultPanel, resultListPanel"
+						actionListener="#{artistController.doUpdateArtist()}">
+					</p:commandButton>
+						
+					<p:commandButton value="Delete Artist" icon="ui-icon-trash" styleClass="btn btn-danger"
+						ajax="true" update="messages, :queryForm:queryValue, singleResultPanel, resultListPanel"
+						onclick="return confirm('Are you sure you want to delete?');"
+						actionListener="#{artistController.doDeleteArtist()}"
+					>
+					</p:commandButton>	
+				
 					<p:commandButton value="Cancel"
 						ajax="true" update="messages, :queryForm:queryValue, singleResultPanel, resultListPanel"
 						styleClass="btn btn-default"

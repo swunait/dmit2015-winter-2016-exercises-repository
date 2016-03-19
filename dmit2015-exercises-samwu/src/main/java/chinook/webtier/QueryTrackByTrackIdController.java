@@ -134,6 +134,10 @@ public class QueryTrackByTrackIdController implements Serializable {
 		selectedMediaTypeId = 0;
 		selectedGenreId = 0;
 	}
+
+	public void setSearchResult(Track searchResult) {
+		this.searchResult = searchResult;
+	}
 	
 	
 	

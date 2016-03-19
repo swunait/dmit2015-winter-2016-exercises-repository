@@ -64,12 +64,25 @@
 						</p:inputText>
 					</div>
 					
+					<p:commandButton value="Update Artist" icon="ui-icon-disk" styleClass="btn btn-success"
+						ajax="true" update="messages, :queryForm:queryValue, singleResultPanel"
+						actionListener="#{artistController.doUpdateArtist()}">
+					</p:commandButton>
+						
+					<p:commandButton value="Delete Artist" icon="ui-icon-trash" styleClass="btn btn-danger"
+						ajax="true" update="messages, :queryForm:queryValue, singleResultPanel"
+						onclick="return confirm('Are you sure you want to delete?');"
+						actionListener="#{artistController.doDeleteArtist()}"
+					>
+					</p:commandButton>	
+				
 					<p:commandButton value="Cancel"
 						ajax="true" update="messages, :queryForm:queryValue, singleResultPanel"
 						styleClass="btn btn-default"
 						actionListener="#{artistController.doCancel()}"
 					>
 					</p:commandButton>	
+				
 				
 				</h:form>
 			
