@@ -2,6 +2,9 @@ package chinook.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.List;
 
 
@@ -19,6 +22,7 @@ public class Artist implements Serializable {
 	@Column(name="ArtistId")
 	private int artistId;
 
+	@NotBlank(message="Artist Name is required.")
 	@Column(name="Name")
 	private String name;
 

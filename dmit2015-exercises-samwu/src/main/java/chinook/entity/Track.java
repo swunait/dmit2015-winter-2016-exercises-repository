@@ -2,6 +2,11 @@ package chinook.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -30,9 +35,13 @@ public class Track implements Serializable {
 	private int milliseconds;
 
 	@Column(name="Name")
+	@NotBlank(message="Track Name is required")
 	private String name;
 
 	@Column(name="UnitPrice")
+	@NotNull(message="Unit Price is required")
+	@DecimalMin(value="0.00", 
+	message="Unit Price cannot be a negative number")
 	private BigDecimal unitPrice;
 
 	//bi-directional many-to-one association to InvoiceLine
