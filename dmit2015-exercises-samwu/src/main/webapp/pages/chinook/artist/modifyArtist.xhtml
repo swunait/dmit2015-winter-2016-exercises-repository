@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/template-dashboard.xhtml">
+	
+	<ui:param name="title" value="Chinook - Modify Artist" />
+
+	<ui:define name="maincontent">
+	
+		<div class="jumbotron">
+			<h1>Modify Artist</h1>
+		</div>
+
+		<p:messages id="messages" />
+		
+		<h:form id="queryForm">
+			
+			<p:focus for="queryValue"></p:focus>
+			
+			<div class="form-inline">
+				<div class="form-group">
+					<p:inputText id="queryValue" 
+						value="#{artistController.queryValue}"
+						styleClass="form-control"
+						style="width:500px"
+						placeholder="artist name to search for">
+					</p:inputText>				
+				</div>
+				<p:commandButton value="SEARCH"
+					ajax="true" update="messages, resultListPanel"
+					styleClass="btn btn-primary"
+					actionListener="#{artistController.doSearchForResultList()}"
+					>
+				</p:commandButton>
+								
+			</div>
+			
+		</h:form>
+		
+		<h:panelGroup id="resultListPanel">
+			
+			<h:form id="resultListForm">
+		
+			<p:dataTable id="artists" 
+				var="artist"
+				value="#{artistController.queryResultList}"
+				rendered="#{artistController.queryResultList != null}"
+				paginator="true" rows="12">
+				
+				<p:column headerText="ID" style="width:100px">
+					<h:outputText value="#{artist.artistId}">
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Artist Name" styleClass="alignLeft">
+					<h:inputText value="#{artist.name}">
+					</h:inputText>
+				</p:column>
+				
+				<p:column>
+					<p:commandButton value="update" icon="ui-icon-disk" styleClass="btn btn-success"
+						ajax="true"
+						update="messages, resultListPanel"
+						actionListener="#{artistController.doUpdateArtist(artist)}">
+					</p:commandButton>
+					
+					<p:commandButton value="delete" icon="ui-icon-trash" styleClass="btn btn-danger"
+						ajax="true" update="messages, resultListPanel"
+						onclick="return confirm('Are you sure you want to delete?');"
+						actionListener="#{artistController.doDeleteArtist(artist)}"
+					>
+					</p:commandButton>	
+				</p:column>				
+				
+			</p:dataTable>
+			
+			</h:form>
+		
+		</h:panelGroup>
+			
+	</ui:define>
+
+</ui:composition>

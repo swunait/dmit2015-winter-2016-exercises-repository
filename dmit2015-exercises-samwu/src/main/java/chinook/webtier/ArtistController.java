@@ -134,7 +134,17 @@ public class ArtistController implements java.io.Serializable {
 			JSFHelper.addErrorMessage("Artist was not updated.");
 		}
 	}
-	
+
+	public void doUpdateArtist(Artist selectedArtist) {
+		try {
+			artistService.update(selectedArtist);
+			JSFHelper.addInfoMessage("Artist was updated.");
+		} catch( Exception e ) {
+			logger.log(Level.WARNING, e.getMessage());
+			JSFHelper.addErrorMessage("Artist was not updated.");
+		}
+	}
+
 	public void doDeleteArtist() {
 		doDeleteArtist(querySingleResult);
 	}
@@ -144,11 +154,11 @@ public class ArtistController implements java.io.Serializable {
 			artistService.delete(selectedArtist);
 			JSFHelper.addInfoMessage("Artist was deleted.");
 			selectedArtist = null;
+			doSearchForResultList();
 		} catch( Exception e ) {
 			logger.log(Level.WARNING, e.getMessage());
 			JSFHelper.addErrorMessage("Artist was not deleted.");
 		}
 	}
-
 	
 }
