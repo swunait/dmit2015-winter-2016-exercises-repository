@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/template-dashboard.xhtml">
+	
+	<ui:param name="title" value="Chinook - Modify Album" />
+
+	<ui:define name="maincontent">
+	
+		<div class="jumbotron">
+			<h1>Modify Album</h1>
+		</div>
+
+		<p:messages id="messages" />
+		
+		<h:form id="queryForm">
+			
+			<p:focus for="queryValue"></p:focus>
+			
+			<div class="form-inline">
+				<div class="form-group">
+					<p:inputText id="queryValue" 
+						value="#{modifyAlbumController.queryValue}"
+						styleClass="form-control"
+						style="width:500px"
+						placeholder="album title to search for">
+					</p:inputText>				
+				</div>
+				<p:commandButton value="SEARCH"
+					ajax="true" update="messages, resultListPanel"
+					styleClass="btn btn-primary"
+					actionListener="#{modifyAlbumController.doSearchForResultList()}"
+					>
+				</p:commandButton>
+				
+				<p:commandButton value="Cancel" icon="ui-icon-circle-close" styleClass="btn btn-default"
+					ajax="true"
+					update="messages, resultListPanel"
+					actionListener="#{modifyAlbumController.doCancel()}">
+				</p:commandButton>
+			</div>
+			
+		</h:form>
+		
+		<h:panelGroup id="resultListPanel">
+			
+			<h:form id="resultListForm">
+		
+			<p:dataTable id="albums" 
+				var="album"
+				value="#{modifyAlbumController.queryResultList}"
+				rendered="#{modifyAlbumController.queryResultList != null}"
+				paginator="true" rows="12">
+				
+				<p:column headerText="AlbumId" style="width:100px">
+					<h:outputText value="#{album.albumId}">
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Title" >
+					<h:inputText value="#{album.title}">
+					</h:inputText>
+				</p:column>
+				
+				<p:column headerText="Artist" >
+					<p:selectOneMenu id="artists" 
+						value="#{album.artist.artistId}"
+						filter="true"
+						filterMatchMode="contains"
+						styleClass="form-control">
+						<f:selectItem itemLabel="Select Artist" itemValue="0" />
+						<f:selectItems value="#{modifyAlbumController.allArtist}" 
+							var="artist" 
+							itemLabel="#{artist.name}"
+							itemValue="#{artist.artistId}" />
+					</p:selectOneMenu>	
+				</p:column>
+				
+				<p:column>
+					<p:commandButton value="update" icon="ui-icon-disk" styleClass="btn btn-success"
+						ajax="true"
+						update="messages, resultListPanel"
+						actionListener="#{modifyAlbumController.doUpdateAlbum(album)}">
+					</p:commandButton>
+					
+				</p:column>				
+				
+			</p:dataTable>
+			
+			</h:form>
+		
+		</h:panelGroup>
+			
+	</ui:define>
+
+</ui:composition>
