@@ -85,5 +85,15 @@ public class ModifyAlbumController implements Serializable{
 			JSFHelper.addErrorMessage("Album was not updated.");
 		}
 	}
+	
+	public void doBulkAlbumUpdate() {
+		try {
+			albumService.updateAllAlbum(queryResultList);
+			JSFHelper.addInfoMessage("Update All was successful.");
+		} catch( Exception e ) {
+			logger.log(Level.SEVERE, e.getMessage());
+			JSFHelper.addErrorMessage("Update All was not successful");
+		}
+	}
 
 }
