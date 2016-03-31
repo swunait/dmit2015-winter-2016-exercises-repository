@@ -40,11 +40,9 @@ public class InvoiceService {
 		invoiceDao.persist(newInvoice);
 		
 		List<InvoiceLine> invoiceLines = cart.getInvoiceLines();
-		int invoiceLineId = 1;
+				
 		for( InvoiceLine lineItem : invoiceLines ) {
 			lineItem.setInvoice(newInvoice);
-			lineItem.setInvoiceLineId(invoiceLineId);
-			invoiceLineId++;
 			
 			total = total.add( lineItem.getUnitPrice().multiply(
 					new BigDecimal( lineItem.getQuantity() ) ) );

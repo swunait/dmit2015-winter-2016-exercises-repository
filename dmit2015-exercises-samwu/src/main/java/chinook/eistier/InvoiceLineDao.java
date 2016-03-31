@@ -1,7 +1,5 @@
 package chinook.eistier;
 
-import java.util.List;
-
 import chinook.entity.InvoiceLine;
 
 public class InvoiceLineDao extends AbstractDao<InvoiceLine> {
