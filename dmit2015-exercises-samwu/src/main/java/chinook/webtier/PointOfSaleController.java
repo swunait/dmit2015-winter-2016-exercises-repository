@@ -2,6 +2,7 @@ package chinook.webtier;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -67,6 +68,11 @@ public class PointOfSaleController implements Serializable {
 		} else {
 			JSFHelper.addErrorMessage("CustomerId is not valid");
 		}
+	}
+	
+	@PostConstruct
+	public void init() {
+		cart.initialize();
 	}
 
 }
