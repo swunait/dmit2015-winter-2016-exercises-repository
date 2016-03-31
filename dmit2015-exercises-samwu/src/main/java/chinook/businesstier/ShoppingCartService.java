@@ -5,21 +5,23 @@ import java.util.List;
 
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.inject.Inject;
 
-import chinook.entity.Customer;
 import chinook.entity.InvoiceLine;
+import chinook.entity.Track;
 
 @Stateful
 public class ShoppingCartService implements ShoppingCartLocal,
 	ShoppingCartRemote
 {
 	private List<InvoiceLine> invoiceLines = new ArrayList<>();
-	private Customer customer = null;
 	private boolean initialized = false;
+	
+	@Inject
+	private TrackService trackService;
 
 	@Override
-	public void initialize(Customer customer) {
-		this.customer = customer;
+	public void initialize() {
 		initialized = true;		
 	}
 
@@ -30,10 +32,24 @@ public class ShoppingCartService implements ShoppingCartLocal,
 	}
 	
 	@Override
+	public void addInvoiceLine(int trackId) {
+		Track currentTrack = trackService.findOneByTrackId(trackId);
+		if( currentTrack != null ) {
+			InvoiceLine item = new InvoiceLine();
+			item.setQuantity(1);
+			item.setTrack(currentTrack);
+			item.setUnitPrice( currentTrack.getUnitPrice() );			
+			invoiceLines.add(item);
+		} else {
+			throw new RuntimeException("Invalid trackId");
+		}
+		
+	}
+	
+	@Override
 	public void addInvoiceLine(InvoiceLine item) {
 		check();
-		invoiceLines.add(item);
-		
+		invoiceLines.add(item);		
 	}
 
 	@Override
@@ -51,7 +67,8 @@ public class ShoppingCartService implements ShoppingCartLocal,
 	@Remove
 	public void release() {
 		invoiceLines.clear();
-		customer = null;		
 	}
+
+	
 
 }

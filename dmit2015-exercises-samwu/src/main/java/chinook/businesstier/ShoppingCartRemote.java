@@ -10,8 +10,9 @@ import chinook.entity.InvoiceLine;
 @Remote
 public interface ShoppingCartRemote {
 
-	void initialize(Customer customer);
+	void initialize();
 	void addInvoiceLine(InvoiceLine item);
+	void addInvoiceLine(int trackId);
 	void removeInvoiceLine(InvoiceLine item);
 	List<InvoiceLine> getInvoiceLines();
 	void release();

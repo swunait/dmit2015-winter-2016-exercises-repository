@@ -19,6 +19,10 @@ public class CustomerService {
 	@Inject
 	private CustomerDao customerDao;
 	
+	public Customer findOne(int customerId) {
+		return customerDao.find(customerId);
+	}
+	
 	public List<Top10CustomerByInvoiceTotal> top10CustomerByInvoiceTotal() {
 		return customerDao.top10CustomerByInvoiceTotal();
 	}
