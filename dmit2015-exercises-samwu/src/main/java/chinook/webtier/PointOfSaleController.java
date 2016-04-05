@@ -64,7 +64,8 @@ public class PointOfSaleController implements Serializable {
 		if( customer != null ) {
 			invoiceService.createInvoice(cart, customer);
 			JSFHelper.addInfoMessage("Created invoice successfully");
-			cart.release();
+//			cart.release();
+			cart.getInvoiceLines().clear();
 		} else {
 			JSFHelper.addErrorMessage("CustomerId is not valid");
 		}
