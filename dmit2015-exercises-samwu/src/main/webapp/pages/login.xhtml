@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/template-dashboard.xhtml">
+	
+	<ui:param name="title" value="Sign In" />
+
+	<ui:define name="maincontent">
+		<h1>Please Sign In</h1>
+
+		<p:messages id="messages"/>
+		
+		<c:if test="${param.error != null}">
+			Invalid username and/or password.
+		</c:if>		
+
+		<h:form id="login_form" prependId="false">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			
+			<p:focus for="username"></p:focus>
+			
+			<p:outputLabel for="username">Username:</p:outputLabel>
+			<p:inputText id="username" name="username" 
+				placeholder="username"></p:inputText>
+			
+			<p:outputLabel for="password">Password:</p:outputLabel>
+			<p:password id="password" name="password" 
+				placeholder="Password">
+			</p:password>
+			
+			<p:commandButton value="Sign In" 
+				ajax="false"
+				>
+			</p:commandButton>
+		</h:form>		
+	</ui:define>
+
+</ui:composition>

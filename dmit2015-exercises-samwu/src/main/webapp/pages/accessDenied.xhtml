@@ -7,17 +7,12 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/template-dashboard.xhtml">
 	
-	<ui:param name="title" value="DMIT2015 Home Page" />
+	<ui:param name="title" value="Access Denied" />
 
 	<ui:define name="maincontent">
-		<h1>DMIT2015 Home Page</h1>
-		
-		<c:if test="#{request.remoteUser != null}">
-			<form class="form-inline" action="#{request.contextPath}/logout" method="post">
-				<input type="submit" value="Log out" /> 
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-			</form>		
-		</c:if>
+		<h1>Access Denied</h1>
+
+		<p>You #{request.remoteUser} do not have permission to access the resource.</p>
 	</ui:define>
 
 </ui:composition>
