@@ -2,7 +2,7 @@ package chinook.eistier;
 
 import java.util.List;
 
-import javax.persistence.Query;
+import jakarta.persistence.Query;
 
 import chinook.entity.MediaType;
 

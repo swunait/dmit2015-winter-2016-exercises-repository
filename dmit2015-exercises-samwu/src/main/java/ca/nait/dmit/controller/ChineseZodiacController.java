@@ -4,11 +4,11 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 import ca.nait.dmit.domain.ChineseZodiac;
 import helper.JSFHelper;

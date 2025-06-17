@@ -6,8 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 import chinook.domain.Top10CustomerByInvoiceTotal;
 import chinook.eistier.CustomerDao;

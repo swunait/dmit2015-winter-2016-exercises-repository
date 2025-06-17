@@ -2,8 +2,8 @@ package chinook.businesstier;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 import chinook.eistier.MediaTypeDao;
 import chinook.entity.MediaType;

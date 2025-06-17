@@ -1,7 +1,7 @@
 package helper;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 
 public class JSFHelper {
 	public static void addInfoMessage(String message) {

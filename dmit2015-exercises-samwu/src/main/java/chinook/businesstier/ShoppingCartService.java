@@ -3,9 +3,9 @@ package chinook.businesstier;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Remove;
-import javax.ejb.Stateful;
-import javax.inject.Inject;
+import jakarta.ejb.Remove;
+import jakarta.ejb.Stateful;
+import jakarta.inject.Inject;
 
 import chinook.entity.InvoiceLine;
 import chinook.entity.Track;

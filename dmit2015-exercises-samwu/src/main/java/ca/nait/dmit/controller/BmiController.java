@@ -1,10 +1,10 @@
 package ca.nait.dmit.controller;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
 import ca.nait.dmit.domain.BMI;
 import helper.JSFHelper;

@@ -3,7 +3,7 @@ package chinook.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import chinook.domain.Top10CustomerByInvoiceTotal;
 

@@ -1,10 +1,9 @@
 package chinook.entity;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.io.Serializable;
-import javax.persistence.*;
-
-import org.hibernate.validator.constraints.NotBlank;
-
 import java.util.List;
 
 

@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Calendar;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 import chinook.eistier.InvoiceDao;
 import chinook.eistier.InvoiceLineDao;

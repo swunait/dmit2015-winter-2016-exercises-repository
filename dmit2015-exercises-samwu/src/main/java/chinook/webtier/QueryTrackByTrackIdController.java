@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.enterprise.context.RequestScoped;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import chinook.businesstier.GenreService;
 import chinook.businesstier.MediaTypeService;

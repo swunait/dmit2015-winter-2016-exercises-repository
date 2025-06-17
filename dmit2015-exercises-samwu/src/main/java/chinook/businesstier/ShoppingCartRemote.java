@@ -2,7 +2,7 @@ package chinook.businesstier;
 
 import java.util.List;
 
-import javax.ejb.Remote;
+import jakarta.ejb.Remote;
 
 import chinook.entity.Customer;
 import chinook.entity.InvoiceLine;

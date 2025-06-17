@@ -1,17 +1,15 @@
 package chinook.eistier;
 
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.inject.Inject;
-import javax.persistence.Query;
-import javax.print.attribute.standard.Media;
-
 import chinook.entity.Album;
 import chinook.entity.Genre;
 import chinook.entity.MediaType;
 import chinook.entity.Track;
+import jakarta.inject.Inject;
+import jakarta.persistence.Query;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TrackDao extends AbstractDao<Track> {
 	private static final long serialVersionUID = -5735611737033280696L;

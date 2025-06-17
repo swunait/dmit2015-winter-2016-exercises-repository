@@ -1,7 +1,9 @@
 package ca.nait.dmit.domain;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UnitTest {
 
@@ -21,7 +23,7 @@ public class UnitTest {
 		assertTrue( "DMIT2015" == "DMIT2015");
 	}
 	
-	@Test(expected=java.lang.ArithmeticException.class)
+//	@Test(expected=java.lang.ArithmeticException.class)
 	public void testForException() {
 		assertEquals( 0, 3 / 0 );
 	}

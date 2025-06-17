@@ -2,9 +2,9 @@ package chinook.businesstier;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.PersistenceException;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
+import jakarta.persistence.PersistenceException;
 
 import chinook.eistier.TrackDao;
 import chinook.entity.Album;

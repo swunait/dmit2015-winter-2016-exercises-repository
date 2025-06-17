@@ -1,10 +1,10 @@
 package ca.nait.dmit.domain;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ChineseZodiacTest {
 
